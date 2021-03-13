@@ -6,6 +6,13 @@ Python REST API wrapper for WP-API/OAuth1
 
 ## Usage
 
+```
+import wordpress_oauth
+api = wordpress_oauth.Wordpress("~/.config/pywordpress_oauth/config.yml")
+image_path = "images/icon.png"
+result = api.upload_image(image_path)
+```
+
 ## Installation
 
 ```
