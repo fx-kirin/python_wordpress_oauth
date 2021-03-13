@@ -81,17 +81,28 @@ class Wordpress:
             resource_owner_secret=resource_owner_secret,
         )
 
-    def upload_image(self, image_path):
+    def upload_image(self, image_path, name=None):
         if isinstance(image_path, str):
             image_path = Path(image_path)
         image_path = image_path.expanduser()
         suffix = image_path.suffix.replace(".", "")
-        name = image_path.name
+        if name is None:
+            name = image_path.name
+        else:
+            pathname = Path(name)
+            if pathname.suffix != suffix:
+                name = name + suffix
         headers = {
             "cache-control": "no-cache",
             "content-disposition": f"attachment; filename={name}",
             "content-type": f"image/{suffix}"
         }
-        __import__('pdb').set_trace()
         result = self.oauth.post(self.api_endpoint / "media", headers=headers, data=image_path.read_bytes())
-        return result.json()
+        return result
+    
+    def post_article(self, data):
+        headers = {
+            "cache-control": "no-cache",
+        }
+        result = self.oauth.post(self.api_endpoint / "posts", headers=headers, json=data)
+        return result

@@ -37,13 +37,21 @@ def teardown_function(function):
 def test_upload_image():
     image_path = Path(__file__).parent / "images/icon.png"
     api = wordpress_oauth.Wordpress("~/.config/pywordpress_oauth/config.yml")
-    __import__('pdb').set_trace()
     result = api.upload_image(image_path)
+    assert result.status_code == 200
+
+
+def test_post_article():
+    api = wordpress_oauth.Wordpress("~/.config/pywordpress_oauth/config.yml")
+    result = api.post_article({"title": "test title", "status": "draft"})
+    assert result.status_code == 201
 
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    kanilog.setup_logger(logfile='/tmp/%s.log' % (os.path.basename(__file__)), level=logging.INFO)
+    kanilog.setup_logger(
+        logfile="/tmp/%s.log" % (os.path.basename(__file__)), level=logging.INFO
+    )
     stdlogging.enable()
 
-    pytest.main([__file__, '-k test_', '-s'])
+    pytest.main([__file__, "-k test_post_article", "-s"])
