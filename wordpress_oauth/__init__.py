@@ -10,7 +10,7 @@ import yaml
 from requests_oauthlib import OAuth1, OAuth1Session
 from urlpath import URL
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "fx-kirin <fx.kirin@gmail.com>"
 __all__: list = []
 

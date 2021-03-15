@@ -31,7 +31,7 @@ def get_requires():
 
 setup(
     name="wordpress_oauth",
-    version="0.1.0",
+    version="0.1.2",
     url="https://github.com/fx-kirin/python_wordpress_oauth",
     license="MIT",
     author="fx-kirin",
