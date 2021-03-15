@@ -90,7 +90,7 @@ class Wordpress:
             name = image_path.name
         else:
             pathname = Path(name)
-            if pathname.suffix != suffix:
+            if pathname.suffix.replace(".", "") != suffix:
                 name = name + suffix
         headers = {
             "cache-control": "no-cache",
