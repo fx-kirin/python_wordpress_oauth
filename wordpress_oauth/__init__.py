@@ -10,7 +10,7 @@ import yaml
 from requests_oauthlib import OAuth1, OAuth1Session
 from urlpath import URL
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "fx-kirin <fx.kirin@gmail.com>"
 __all__: list = []
 
@@ -95,14 +95,18 @@ class Wordpress:
         headers = {
             "cache-control": "no-cache",
             "content-disposition": f"attachment; filename={name}",
-            "content-type": f"image/{suffix}"
+            "content-type": f"image/{suffix}",
         }
-        result = self.oauth.post(self.api_endpoint / "media", headers=headers, data=image_path.read_bytes())
+        result = self.oauth.post(
+            self.api_endpoint / "media", headers=headers, data=image_path.read_bytes()
+        )
         return result
-    
+
     def post_article(self, data):
         headers = {
             "cache-control": "no-cache",
         }
-        result = self.oauth.post(self.api_endpoint / "posts", headers=headers, json=data)
+        result = self.oauth.post(
+            self.api_endpoint / "posts", headers=headers, json=data
+        )
         return result
